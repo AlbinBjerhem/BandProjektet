@@ -1,11 +1,24 @@
 import fs from "fs";
 
-let nextArtistId = 1;
-const Artists = [];
+let Artists = [];
 
 export class Artist {
+
+  static nextArtistId = 1;
+
+  static loadArtists() {
+    try {
+      const data = fs.readFileSync("Artists.json", "utf-8");
+      Artists = JSON.parse(data);
+
+      Artist.nextArtistId = Math.max(0, ...Artists.map((artist) => artist.id)) + 1;
+    } catch (error) {
+      Artist.nextArtistId = 1;
+    }
+  }
+
   constructor(name, infoText, birthYear, activeBands = "", previousBands = "", instruments = []) {
-    this.id = nextArtistId++;
+    this.id = Artist.nextArtistId++;
     this.name = name;
     this.infoText = infoText;
     this.birthYear = birthYear;
@@ -27,6 +40,8 @@ export class Artist {
     console.log("Artist added successfully.");
   }
 }
+
+Artist.loadArtists();
 
 // Test data
 // Artist.addArtist('Albin', 'Bor i en lägenhet', 1990, 'Håkan', 'Bengt', ['Piano', 'Trummor']);

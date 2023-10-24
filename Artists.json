@@ -1,14 +1,29 @@
 [
   {
     "id": 1,
-    "name": "Albin",
-    "infoText": "Bor i en lägenhet",
-    "birthYear": 1990,
-    "activeBands": "Håkan",
-    "previousBands": "Bengt",
-    "instruments": [
-      "Piano",
-      "Trummor"
-    ]
+    "name": "a",
+    "infoText": "a",
+    "birthYear": "a",
+    "activeBands": "a",
+    "previousBands": "a",
+    "instruments": "a"
+  },
+  {
+    "id": 2,
+    "name": "b",
+    "infoText": "b",
+    "birthYear": "b",
+    "activeBands": "b",
+    "previousBands": "b",
+    "instruments": "b"
+  },
+  {
+    "id": 3,
+    "name": "c",
+    "infoText": "c",
+    "birthYear": "c",
+    "activeBands": "c",
+    "previousBands": "c",
+    "instruments": "c"
   }
 ]
