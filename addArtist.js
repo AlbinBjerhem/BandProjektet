@@ -9,7 +9,7 @@ class Artist {
   previousBands;
   instruments;
 
-  constructor(name = "", infoText = "", birthYear = 0, activeBands = [], previousBands = [], instruments = []) {
+  constructor(name, infoText, birthYear, activeBands = "", previousBands = "", instruments = []) {
     this.name = name;
     this.infoText = infoText;
     this.birthYear = birthYear;
