@@ -1,4 +1,3 @@
-// export default Band
 import fs from "fs"
 
 let nextBandId = 1;

@@ -10,5 +10,17 @@
       "Piano",
       "Trummor"
     ]
+  },
+  {
+    "id": 2,
+    "name": "Jens",
+    "infoText": "Har en bil",
+    "birthYear": 1992,
+    "activeBands": "Arn",
+    "previousBands": "Leif",
+    "instruments": [
+      "Gitarr",
+      "Bas"
+    ]
   }
 ]

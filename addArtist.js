@@ -1,10 +1,9 @@
-// export default Artist
 import fs from "fs";
 
 let nextArtistId = 1;
 const Artists = [];
 
-class Artist {
+export class Artist {
   constructor(name, infoText, birthYear, activeBands = "", previousBands = "", instruments = []) {
     this.id = nextArtistId++;
     this.name = name;
