@@ -22,5 +22,25 @@
       "Gitarr",
       "Bas"
     ]
+  },
+  {
+    "id": 3,
+    "name": "Pelle",
+    "infoText": "Han bor pa landet",
+    "birthYear": "1990",
+    "activeBands": [
+      "Gunns",
+      " kennies",
+      " bnnies",
+      ""
+    ],
+    "previousBands": [
+      "plelle",
+      " flele"
+    ],
+    "instruments": [
+      "Gura",
+      " trummor"
+    ]
   }
 ]
