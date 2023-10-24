@@ -9,15 +9,6 @@
     "instruments": "a"
   },
   {
-    "id": 2,
-    "name": "b",
-    "infoText": "b",
-    "birthYear": "b",
-    "activeBands": "b",
-    "previousBands": "b",
-    "instruments": "b"
-  },
-  {
     "id": 3,
     "name": "c",
     "infoText": "c",

@@ -58,10 +58,43 @@ export class Menu {
           Artist.addArtist(name, infoText, birthYear, activeBands, previousBands, instruments)
           break;
         case "2":
-          console.log("You selected Remove Artist");
+          Artist.listArtists();
+
+          let artistToRemove;
+
+          while (true) {
+            const removeArtist = this.promptSync("Type the ID of the artist you want to remove: ");
+            artistToRemove = Artist.getArtistById(parseInt(removeArtist));
+
+            if (artistToRemove) {
+              break; // Exit the loop if a valid artist is found
+            } else {
+              console.log("Invalid artist ID. Please enter a valid ID.");
+            }
+          }
+
+          console.log(`Removing artist with ID ${artistToRemove.id} - ${artistToRemove.name}`);
+
+          let validInput = false;
+
+          while (!validInput) {
+            const confirm = this.promptSync("Are you sure you want to remove this artist? (yes/no): ");
+
+            switch (confirm.toLowerCase()) {
+              case "yes":
+                Artist.removeArtist(artistToRemove.id);
+                validInput = true;
+                break;
+              case "no":
+                validInput = true;
+                break;
+              default:
+                console.log("Invalid input. Please enter 'yes' or 'no'.");
+            }
+          }
           break;
         case "3":
-          console.log("You selected Show Artists");
+          Artist.listArtists();
           break;
         case "4":
           return;
