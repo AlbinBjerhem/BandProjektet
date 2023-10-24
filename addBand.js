@@ -1,9 +1,10 @@
 // export default Band
 import fs from "fs"
 
+let nextBandId = 1;
 const Bands = [];
 
-class Band {
+export class Band {
 
   name;
   infoText;
@@ -12,6 +13,7 @@ class Band {
   bandMemebers
 
   constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = []) {
+    this.id = nextBandId++;
     this.name = name;
     this.infoText = infoText;
     this.yearCreated = yearCreated;
