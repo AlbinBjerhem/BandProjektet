@@ -17,6 +17,29 @@ export class Band {
     }
   }
 
+  static listBands() {
+    console.log("List of Bands:");
+    Bands.forEach((band) => {
+      console.log(`ID: ${band.id}, Name: ${band.name}`);
+    });
+  }
+
+  static getBandById(id) {
+    return Bands.find((band) => band.id === id);
+  }
+
+  static removeBand(id) {
+    const index = Bands.findIndex((band) => band.id === id);
+
+    if (index !== -1) {
+      Bands.splice(index, 1);
+      fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+      console.log(`Band with ID ${id} removed successfully.`);
+    } else {
+      console.log(`Band with ID ${id} not found.`);
+    }
+  }
+
   constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = []) {
     this.id = Band.nextBandId++;
     this.name = name;
@@ -41,5 +64,3 @@ export class Band {
 }
 
 Band.loadBands();
-//Testdata
-// Band.addBand('Albin', 'HejsanHejsa', 1990, 1999, ['Albin', 'Pelle']);

@@ -43,5 +43,3 @@ export class Artist {
 
 Artist.loadArtists();
 
-// Test data
-// Artist.addArtist('Albin', 'Bor i en lägenhet', 1990, 'Håkan', 'Bengt', ['Piano', 'Trummor']);

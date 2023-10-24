@@ -93,10 +93,44 @@ export class Menu {
           Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers)
           break;
         case "2":
-          console.log("You selected Remove Band");
+          Band.listBands();
+
+          let bandToRemove;
+
+          while (true) {
+            const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
+            bandToRemove = Band.getBandById(parseInt(removeBand));
+
+            if (bandToRemove) {
+              break; // Exit the loop if a valid band is found
+            } else {
+              console.log("Invalid band ID. Please enter a valid ID.");
+            }
+          }
+
+          console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+
+          let validInput = false;
+
+          while (!validInput) {
+            const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
+
+            switch (confirm.toLowerCase()) {
+              case "yes":
+                Band.removeBand(bandToRemove.id);
+                validInput = true;
+                break;
+              case "no":
+                validInput = true;
+                break;
+              default:
+                console.log("Invalid input. Please enter 'yes' or 'no'.");
+            }
+          }
           break;
+
         case "3":
-          console.log("You selected Show Bands");
+          Band.listBands();
           break;
         case "4":
           return;

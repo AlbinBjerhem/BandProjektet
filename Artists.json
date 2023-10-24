@@ -25,5 +25,14 @@
     "activeBands": "c",
     "previousBands": "c",
     "instruments": "c"
+  },
+  {
+    "id": 4,
+    "name": "1",
+    "infoText": "1",
+    "birthYear": "1",
+    "activeBands": "1",
+    "previousBands": "1",
+    "instruments": "1"
   }
 ]
