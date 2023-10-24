@@ -85,6 +85,12 @@ export class Menu {
       switch (bandMenuChoice) {
         case "1":
           console.log("You selected Add Band");
+          const name = promptSync("Type bands name: ")
+          const infoText = promptSync("Type in band information: ");
+          const yearCreated = promptSync("Type in the year tha band whas created: ");
+          const yearDissolved = promptSync("What year was the band dissolved: ");
+          const bandMemebers = promptSync("Who are the bands members: ");
+          Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers)
           break;
         case "2":
           console.log("You selected Remove Band");

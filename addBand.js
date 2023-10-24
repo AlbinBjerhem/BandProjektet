@@ -1,18 +1,24 @@
 import fs from "fs"
 
-let nextBandId = 1;
-const Bands = [];
+let Bands = [];
 
 export class Band {
 
-  name;
-  infoText;
-  yearCreated;
-  yearDissolved;
-  bandMemebers
+  static nextBandId = 1;
+
+  static loadBands() {
+    try {
+      const data = fs.readFileSync("Bands.json", "utf-8");
+      Bands = JSON.parse(data);
+
+      Band.nextBandId = Math.max(0, ...Bands.map((band) => band.id)) + 1;
+    } catch (error) {
+      Band.nextBandId = 1;
+    }
+  }
 
   constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = []) {
-    this.id = nextBandId++;
+    this.id = Band.nextBandId++;
     this.name = name;
     this.infoText = infoText;
     this.yearCreated = yearCreated;
@@ -34,5 +40,6 @@ export class Band {
 
 }
 
+Band.loadBands();
 //Testdata
 // Band.addBand('Albin', 'HejsanHejsa', 1990, 1999, ['Albin', 'Pelle']);

@@ -9,5 +9,13 @@
       "Pelle"
     ],
     "id": 1
+  },
+  {
+    "id": 2,
+    "name": "a",
+    "infoText": "a",
+    "yearCreated": "a",
+    "yearDissolved": "a",
+    "bandMemebers": "a"
   }
 ]
