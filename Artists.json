@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Albin",
+    "infoText": "Bor i en lägenhet",
+    "birthYear": 1990,
+    "activeBands": "Håkan",
+    "previousBands": "Bengt",
+    "instruments": [
+      "Piano",
+      "Trummor"
+    ]
+  }
+]
