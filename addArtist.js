@@ -29,4 +29,4 @@ export class Artist {
 }
 
 // Test data
-Artist.addArtist('Albin', 'Bor i en lägenhet', 1990, 'Håkan', 'Bengt', ['Piano', 'Trummor']);
+// Artist.addArtist('Albin', 'Bor i en lägenhet', 1990, 'Håkan', 'Bengt', ['Piano', 'Trummor']);

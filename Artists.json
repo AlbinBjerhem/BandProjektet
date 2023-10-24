@@ -10,37 +10,5 @@
       "Piano",
       "Trummor"
     ]
-  },
-  {
-    "id": 2,
-    "name": "Jens",
-    "infoText": "Har en bil",
-    "birthYear": 1992,
-    "activeBands": "Arn",
-    "previousBands": "Leif",
-    "instruments": [
-      "Gitarr",
-      "Bas"
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Pelle",
-    "infoText": "Han bor pa landet",
-    "birthYear": "1990",
-    "activeBands": [
-      "Gunns",
-      " kennies",
-      " bnnies",
-      ""
-    ],
-    "previousBands": [
-      "plelle",
-      " flele"
-    ],
-    "instruments": [
-      "Gura",
-      " trummor"
-    ]
   }
 ]

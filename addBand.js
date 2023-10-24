@@ -35,4 +35,4 @@ export class Band {
 }
 
 //Testdata
-Band.addBand('Albin', 'HejsanHejsa', 1990, 1999, ['Albin', 'Pelle']);
+// Band.addBand('Albin', 'HejsanHejsa', 1990, 1999, ['Albin', 'Pelle']);

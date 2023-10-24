@@ -9,16 +9,5 @@
       "Pelle"
     ],
     "id": 1
-  },
-  {
-    "name": "Testband",
-    "infoText": "Testestet",
-    "yearCreated": 2000,
-    "yearDissolved": 0,
-    "bandMemebers": [
-      "Hans",
-      "Kalle"
-    ],
-    "id": 2
   }
 ]
