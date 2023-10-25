@@ -40,22 +40,22 @@ export class Artist {
     }
   }
 
-  constructor(name, infoText, birthYear, activeBands = "", previousBands = "", instruments = []) {
+  constructor(name, infoText, birthDay, activeBands = "", previousBands = "", instruments = []) {
     this.id = Artist.nextArtistId++;
     this.name = name;
     this.infoText = infoText;
-    this.birthYear = birthYear;
+    this.birthDay = birthDay;
     this.activeBands = activeBands;
     this.previousBands = previousBands;
     this.instruments = instruments;
   }
 
-  static createArtist(name, infoText, birthYear, activeBands = "", previousBands = "", instruments = []) {
-    return new Artist(name, infoText, birthYear, activeBands, previousBands, instruments);
+  static createArtist(name, infoText, birthDay, activeBands = "", previousBands = "", instruments = []) {
+    return new Artist(name, infoText, birthDay, activeBands, previousBands, instruments);
   }
 
-  static addArtist(name, infoText, birthYear, activeBands, previousBands, instruments) {
-    const newArtist = new Artist(name, infoText, birthYear, activeBands, previousBands, instruments);
+  static addArtist(name, infoText, birthDay, activeBands, previousBands, instruments) {
+    const newArtist = new Artist(name, infoText, birthDay, activeBands, previousBands, instruments);
     Artists.push(newArtist);
 
     fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");

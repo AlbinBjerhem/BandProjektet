@@ -51,11 +51,28 @@ export class Menu {
           console.log("You selected Add Artist");
           const name = this.promptSync("Type artists name: ");
           const infoText = this.promptSync("Type artist information: ");
-          const birthYear = this.promptSync("Type in the birthyear of the artist: ");
-          const activeBands = this.promptSync("What bands are the artist active in: ");
-          const previousBands = this.promptSync("What previous bands have the artist played in: ");
-          const instruments = this.promptSync("What instruments does the artist play: ")
-          Artist.addArtist(name, infoText, birthYear, activeBands, previousBands, instruments)
+
+          let birthDay;
+          while (true) {
+            birthDay = this.promptSync("Type when the artist was borne (yyyy-mm-dd): ");
+            if (/^\d{4}-\d{2}-\d{2}$/.test(birthDay)) {
+              const inputDate = new Date(birthDay);
+              const currentDate = new Date();
+
+              if (inputDate <= currentDate) {
+                break;
+              } else {
+                console.log("The artist haven´t been borne yet! Enter valid birthday.");
+              }
+            } else {
+              console.log("Invalid format. Please use yyyy-mm-dd format (e.g., 1990-12-31).");
+            }
+          }
+
+          const activeBands = [];
+          const previousBands = [];
+          const instruments = [];
+          Artist.addArtist(name, infoText, birthDay, activeBands, previousBands, instruments)
           break;
         case "2":
           Artist.listArtists();
