@@ -11,16 +11,39 @@ export class Artist {
       const data = fs.readFileSync("Artists.json", "utf-8");
       Artists = JSON.parse(data);
 
+      Artists.forEach((artist) => {
+        artist.birthDay = new Date(artist.birthDay);
+      });
+
       Artist.nextArtistId = Math.max(0, ...Artists.map((artist) => artist.id)) + 1;
     } catch (error) {
       Artist.nextArtistId = 1;
     }
   }
 
+
+  static calculateAge(birthDay) {
+    const today = new Date();
+    const birthDayAge = new Date(birthDay);
+
+    let age = today.getFullYear() - birthDayAge.getFullYear();
+
+    if (
+      today.getMonth() < birthDayAge.getMonth() ||
+      (today.getMonth() === birthDayAge.getMonth() && today.getDate() < birthDayAge.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }
+
+
   static listArtists() {
     console.log("List of Artists:");
     Artists.forEach((artist) => {
-      console.log(`ID: ${artist.id}, Name: ${artist.name}`);
+      const age = Artist.calculateAge(artist.birthDay);
+      console.log(`ID: ${artist.id}, Name: ${artist.name} Age: ${age} years`);
     });
   }
 

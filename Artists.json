@@ -1,139 +1,18 @@
 [
   {
     "id": 1,
-    "name": "a",
-    "infoText": "a",
-    "birthYear": "a",
-    "activeBands": "a",
-    "previousBands": "a",
-    "instruments": "a"
-  },
-  {
-    "id": 3,
-    "name": "c",
-    "infoText": "c",
-    "birthYear": "c",
-    "activeBands": "c",
-    "previousBands": "c",
-    "instruments": "c"
-  },
-  {
-    "id": 4,
-    "name": "1",
-    "infoText": "1",
-    "birthYear": "1",
-    "activeBands": "1",
-    "previousBands": "1",
-    "instruments": "1"
-  },
-  {
-    "id": 5,
     "name": "Albin",
-    "infoText": "Hejsan Hejsan",
-    "birthYear": "1990",
-    "birthMonth": "meck",
-    "birthDay": "peck",
-    "activeBands": "dsa",
-    "previousBands": "",
-    "instruments": []
-  },
-  {
-    "id": 6,
-    "name": "Albin",
-    "infoText": "d",
-    "birthYear": "d",
-    "birthMonth": "d",
-    "birthDay": "d",
-    "activeBands": "d",
-    "previousBands": "",
-    "instruments": []
-  },
-  {
-    "id": 7,
-    "name": "Albin",
-    "infoText": "jds",
-    "birthYear": "dsad",
-    "activeBands": "kd",
-    "previousBands": "s",
-    "instruments": "a"
-  },
-  {
-    "id": 8,
-    "name": "Albin",
-    "infoText": "hdsa",
-    "birthYear": "1990",
+    "infoText": "hejsan",
+    "birthDay": "+012000-02-01T23:00:00.000Z",
     "activeBands": [],
     "previousBands": [],
     "instruments": []
   },
   {
-    "id": 9,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "a",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 10,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "9999-99-99",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 11,
-    "name": "Albin",
-    "infoText": "dsadsa",
-    "birthDay": "2000-10-10",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 12,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "2000-12-31",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 13,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "0000-01-01",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 14,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "2000-02-30",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 15,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "1999-12-31",
-    "activeBands": [],
-    "previousBands": [],
-    "instruments": []
-  },
-  {
-    "id": 16,
-    "name": "a",
-    "infoText": "a",
-    "birthDay": "2000-02-02",
+    "id": 2,
+    "name": "Nisse",
+    "infoText": "He drinks alot",
+    "birthDay": "1989-03-25",
     "activeBands": [],
     "previousBands": [],
     "instruments": []
