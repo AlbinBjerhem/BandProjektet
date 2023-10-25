@@ -72,6 +72,22 @@ export class Menu {
           const activeBands = [];
           const previousBands = [];
           const instruments = [];
+
+          while (true) {
+            const instrument = this.promptSync("Type the type of instrument the artist plays, you need to at least add one (press enter when finished): ");
+            if (instrument === "") {
+              if (instruments.length > 0) {
+                break;
+              } else {
+                console.log("Please add at least one instrument.");
+              }
+            } else {
+              instruments.push(instrument);
+              console.log(`Instrument "${instrument}" added to the artist's instruments.`);
+            }
+          }
+
+
           Artist.addArtist(name, infoText, birthDay, activeBands, previousBands, instruments)
           break;
         case "2":
