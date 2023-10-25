@@ -128,6 +128,17 @@ export class Menu {
           break;
         case "3":
           Artist.listArtists();
+          const extendedInfo = this.promptSync("Do you want to see more information about the artists? (yes/no): ")
+
+          switch (extendedInfo.toLocaleLowerCase()) {
+            case "yes":
+              Artist.listArtistsExtended();
+              break;
+            case "no":
+              return;
+            default:
+              console.log("Invalid input. Please enter 'yes' or 'no'.");
+          }
           break;
         case "4":
           return;

@@ -46,6 +46,19 @@ export class Artist {
       console.log(`ID: ${artist.id}, Name: ${artist.name} Age: ${age} years`);
     });
   }
+  static listArtistsExtended() {
+    console.log("List of Artists (Extended):");
+    Artists.forEach((artist) => {
+      const age = Artist.calculateAge(artist.birthDay);
+      console.log(`ID: ${artist.id}, Name: ${artist.name}, Age: ${age} years`);
+      console.log(`Info Text: ${artist.infoText}`);
+      console.log(`Active Bands: ${artist.activeBands.join(', ')}`);
+      console.log(`Previous Bands: ${artist.previousBands.join(', ')}`);
+      console.log(`Instruments: ${artist.instruments.join(', ')}`);
+      console.log("\n");
+    });
+  }
+
 
   static getArtistById(id) {
     return Artists.find((artist) => artist.id === id);
