@@ -5,13 +5,14 @@
     "infoText": "aaaaa",
     "yearCreated": "1200",
     "yearDissolved": "",
-    "bandMembers": [
+    "bandMembers": [],
+    "previousMembers": [
       {
         "artistName": "aaa",
         "instrument": "Guitarr",
-        "joinYear": "1991"
+        "joinYear": "1991",
+        "leftBandDate": "1990-02-02"
       }
-    ],
-    "previousMembers": []
+    ]
   }
 ]

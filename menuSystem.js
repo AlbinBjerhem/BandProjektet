@@ -257,7 +257,7 @@ export class Menu {
             this.addBandToArtist();
             break;
           case "2":
-            console.log("Remove Band");
+            this.removeBandFromArtist();
             break;
           case "3":
             this.removeArtist();
@@ -506,6 +506,88 @@ export class Menu {
     }
   }
 
+  removeBandFromArtist() {
+    if (fileCheckerArtists.isFileNotEmpty() && fileCheckerBands.isFileNotEmpty()) {
+      Artist.listArtistsExtended();
+      const artistID = this.promptSync("Enter the ID of the artist to remove a band: ");
+      const selectedArtist = Artist.getArtistById(parseInt(artistID));
+
+      if (selectedArtist) {
+        Band.listBands();
+        const bandID = this.promptSync("Enter the ID of the band to remove from the artist: ");
+        const selectedBand = Band.getBandById(parseInt(bandID));
+
+        if (selectedBand) {
+
+          const artistName = selectedArtist.name;
+
+
+          const bandIndex = selectedArtist.activeBands.findIndex(band => band.bandName === selectedBand.name);
+
+          if (bandIndex !== -1) {
+
+            const removedBand = selectedArtist.activeBands[bandIndex];
+
+            selectedArtist.activeBands.splice(bandIndex, 1);
+
+
+            const leftBandDate = this.promptSync(`Enter the year when you left ${selectedBand.name} (yyyy): `);
+
+            if (/^\d{4}$/.test(leftBandDate)) {
+
+            } else {
+              console.log("Invalid year format. Please enter a four-digit year (e.g., 2023).");
+            }
+
+
+            if (!selectedArtist.previousBands) {
+              selectedArtist.previousBands = [];
+            }
+            selectedArtist.previousBands.push({
+              bandName: selectedBand.name,
+              instrument: removedBand.instrument,
+              joinYear: removedBand.joinYear,
+              leftBandDate,
+            });
+
+
+            const artistIndex = selectedBand.bandMembers.findIndex(member => member.artistName === artistName);
+
+            if (artistIndex !== -1) {
+
+              const removedArtist = selectedBand.bandMembers[artistIndex];
+
+              selectedBand.bandMembers.splice(artistIndex, 1);
+
+
+              if (!selectedBand.previousMembers) {
+                selectedBand.previousMembers = [];
+              }
+              selectedBand.previousMembers.push({
+                artistName,
+                instrument: removedArtist.instrument,
+                joinYear: removedArtist.joinYear,
+                leftBandDate,
+              });
+            }
+
+            fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
+            fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+
+            console.log(`Band '${selectedBand.name}' has been removed from artist '${selectedArtist.name}'.`);
+          } else {
+            console.log(`The artist '${selectedArtist.name}' is not a member of the band '${selectedBand.name}'.`);
+          }
+        } else {
+          console.log("Invalid band ID. The selected band does not exist.");
+        }
+      } else {
+        console.log("Invalid artist ID. The selected artist does not exist.");
+      }
+    } else {
+      console.log("There are no artists or bands in the directory. Please add some first.");
+    }
+  }
 
 
 }

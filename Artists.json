@@ -342,14 +342,15 @@
     "name": "aaa",
     "infoText": "aaaaa",
     "birthDay": "1991-11-11T00:00:00.000Z",
-    "activeBands": [
+    "activeBands": [],
+    "previousBands": [
       {
         "bandName": "aaa",
         "instrument": "Guitarr",
-        "joinYear": "1991"
+        "joinYear": "1991",
+        "leftBandDate": "1990-02-02"
       }
     ],
-    "previousBands": [],
     "instruments": [
       "Guitarr"
     ]
