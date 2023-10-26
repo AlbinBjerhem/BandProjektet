@@ -21,6 +21,10 @@ export class Artist {
     }
   }
 
+  static activeBandsAdd(newArtist, bandName, instrument, joinYear) {
+    newArtist.activeBands.push({ bandName, instrument, joinYear });
+  }
+
 
   static calculateAge(birthDay) {
     const today = new Date();
@@ -52,7 +56,12 @@ export class Artist {
       const age = Artist.calculateAge(artist.birthDay);
       console.log(`ID: ${artist.id}, Name: ${artist.name}, Age: ${age} years`);
       console.log(`Info Text: ${artist.infoText}`);
-      console.log(`Active Bands: ${artist.activeBands.join(', ')}`);
+
+      const activeBandsInfo = artist.activeBands.map(bandInfo => {
+        return `Name: ${bandInfo.bandName}, Instrument: ${bandInfo.instrument}, Started in band: Year: ${bandInfo.joinYear}`;
+      });
+      console.log(`Active Bands: ${activeBandsInfo.join(', ')}`);
+
       console.log(`Previous Bands: ${artist.previousBands.join(', ')}`);
       console.log(`Instruments: ${artist.instruments.join(', ')}`);
       console.log("\n");

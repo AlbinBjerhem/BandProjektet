@@ -8,7 +8,27 @@
     "bandMemebers": [
       "aaa",
       "aaaa",
-      "1991"
+      "1991",
+      {
+        "artistName": "aaaa",
+        "instrument": "aa",
+        "joinYear": "1991"
+      }
+    ],
+    "previousMembers": []
+  },
+  {
+    "id": 2,
+    "name": "aaa",
+    "infoText": "dsadsadsadsa",
+    "yearCreated": "1999",
+    "yearDissolved": "",
+    "bandMemebers": [
+      {
+        "artistName": "dsadsadsa",
+        "instrument": "dsadsa",
+        "joinYear": "1991"
+      }
     ],
     "previousMembers": []
   }

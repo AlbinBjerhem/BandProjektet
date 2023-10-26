@@ -150,9 +150,10 @@ export class Menu {
 
                       const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
 
-                      newArtist.activeBands.push(selectedBand.name, selectedInstrument, joinYear);
+                      Artist.activeBandsAdd(newArtist, selectedBand.name, selectedInstrument, joinYear);
 
-                      selectedBand.bandMemebers.push(artistName, selectedInstrument, joinYear);
+                      Band.activeArtistsAdd(selectedBand, artistName, selectedInstrument, joinYear);
+
 
                       fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
                       fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");

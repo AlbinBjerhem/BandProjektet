@@ -17,6 +17,11 @@ export class Band {
     }
   }
 
+  static activeArtistsAdd(selectedBand, artistName, instrument, joinYear) {
+    selectedBand.bandMemebers.push({ artistName, instrument, joinYear });
+  }
+
+
   static listBands() {
     console.log("List of Bands:");
     Bands.forEach((band) => {
