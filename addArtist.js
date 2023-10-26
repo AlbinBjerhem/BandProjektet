@@ -62,7 +62,11 @@ export class Artist {
       });
       console.log(`Active Bands: ${activeBandsInfo.join(', ')}`);
 
-      console.log(`Previous Bands: ${artist.previousBands.join(', ')}`);
+      const previousBandsInfo = artist.previousBands.map(bandInfo => {
+        return `Name: ${bandInfo.bandName}, Instrument: ${bandInfo.instrument}, Started in band: Year: ${bandInfo.joinYear}, Left band: Year: ${bandInfo.leftBandDate}`;
+      });
+      console.log(`Previous Bands: ${previousBandsInfo.join(', ')}`);
+
       console.log(`Instruments: ${artist.instruments.join(', ')}`);
       console.log("\n");
     });

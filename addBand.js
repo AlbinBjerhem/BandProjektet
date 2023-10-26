@@ -39,7 +39,12 @@ export class Band {
         return `Name: ${membersInfo.artistName}, Instrument: ${membersInfo.instrument}, Started in band: ${membersInfo.joinYear}`;
       });
       console.log(`Active Members: ${activeMemberInfo.join(', ')}`);
-      console.log(`Previous Members: ${band.previousMembers.join(', ')}`);
+
+      const previousMemberInfo = band.previousMembers.map(membersInfo => {
+        `Name: ${membersInfo.artistName}, Instrument: ${membersInfo.instrument}, Started in band: ${membersInfo.joinYear}, Left band: Year: ${membersInfo.leftBandDate}`;
+      });
+
+      console.log(`Previous Members: ${previousMemberInfo.join(', ')}`);
       console.log(`Year the band was disolved: ${band.yearDissolved}`);
       console.log("\n");
     });

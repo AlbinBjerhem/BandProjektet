@@ -276,3 +276,45 @@ while (true) {
     console.log("Invalid band ID. Please enter a valid ID.");
   }
 }
+
+
+
+
+Band.listBands();
+
+let bandToRemove;
+
+while (true) {
+  const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
+  bandToRemove = Band.getBandById(parseInt(removeBand));
+
+  if (bandToRemove) {
+    break;
+  } else {
+    console.log("Invalid band ID. Please enter a valid ID.");
+  }
+}
+
+console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+
+let validInput = false;
+
+while (!validInput) {
+  const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
+
+  switch (confirm.toLowerCase()) {
+    case "yes":
+      Band.removeBand(bandToRemove.id);
+      validInput = true;
+      break;
+    case "no":
+      validInput = true;
+      break;
+    default:
+      console.log("Invalid input. Please enter 'yes' or 'no'.");
+  }
+}
+    } else {
+  console.log("There are no bands in the directory. Add some bands first.");
+}
+  }

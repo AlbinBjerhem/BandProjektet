@@ -78,7 +78,7 @@ export class Menu {
   bandMenu() {
     while (true) {
       // console.clear();
-      console.log("n\Band Menu\n");
+      console.log("\nBand Menu\n");
       console.log("1. Add Band");
       console.log("2. Edit Band");
       console.log("3. Show Bands");
@@ -347,43 +347,36 @@ export class Menu {
   // ----------------------------------------------------------------------------------------
   // -------------------- TA BORT BAND --------------------
   editBand() {
-    if (fileCheckerBands.isFileNotEmpty()) {
-      Band.listBands();
+    if (fileCheckerArtists.isFileNotEmpty()) {
 
-      let bandToRemove;
+      let editBandChoice = false;
 
-      while (true) {
-        const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
-        bandToRemove = Band.getBandById(parseInt(removeBand));
+      while (!editBandChoice) {
 
-        if (bandToRemove) {
-          break;
-        } else {
-          console.log("Invalid band ID. Please enter a valid ID.");
-        }
-      }
+        console.log("Edit Bands\n");
+        console.log("1. Add Artist to Band");
+        console.log("2. Remove Artist from Band");
+        console.log("3. Remove Band");
+        console.log("4. Go back to Band Menu");
 
-      console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+        const choiceEditBand = this.promptSync("Enter your choice: ")
 
-      let validInput = false;
-
-      while (!validInput) {
-        const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
-
-        switch (confirm.toLowerCase()) {
-          case "yes":
-            Band.removeBand(bandToRemove.id);
-            validInput = true;
+        switch (choiceEditBand) {
+          case "1":
+            this.addBandToArtist();
             break;
-          case "no":
-            validInput = true;
+          case "2":
+            this.removeBandFromArtist();
             break;
+          case "3":
+            this.removeArtist();
+            break;
+          case "4":
+            return;
           default:
-            console.log("Invalid input. Please enter 'yes' or 'no'.");
+            console.log("Invalid choice. Please select a number between 1 - 4");
         }
       }
-    } else {
-      console.log("There are no bands in the directory. Add some bands first.");
     }
   }
   // --------------------------------------------------------------------------------
@@ -588,6 +581,8 @@ export class Menu {
       console.log("There are no artists or bands in the directory. Please add some first.");
     }
   }
+
+
 
 
 }
