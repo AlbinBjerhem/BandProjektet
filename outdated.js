@@ -54,7 +54,7 @@
 // }
 
 // mainMenu();
-
+import { Band } from addBand.js
 
 artistMenu() {
   while (true) {
@@ -248,5 +248,31 @@ artistMenu() {
       default:
         console.log("Invalid choice. Please select a number between 1 - 4");
     }
+  }
+}
+
+
+const yearDissolved = "";
+const bandMemebers = [];
+const previousMembers = [];
+Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers)
+break;
+
+        // -------------------- TA BORT BAND --------------------
+
+
+        case "2":
+Band.listBands();
+
+let bandToRemove;
+
+while (true) {
+  const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
+  bandToRemove = Band.getBandById(parseInt(removeBand));
+
+  if (bandToRemove) {
+    break;
+  } else {
+    console.log("Invalid band ID. Please enter a valid ID.");
   }
 }

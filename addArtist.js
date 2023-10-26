@@ -102,3 +102,4 @@ export class Artist {
 
 Artist.loadArtists();
 
+export { Artists };

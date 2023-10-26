@@ -66,3 +66,5 @@ export class Band {
 
 
 Band.loadBands();
+
+export { Bands }

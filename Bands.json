@@ -5,7 +5,11 @@
     "infoText": "aaaaaaa",
     "yearCreated": "1111",
     "yearDissolved": "",
-    "bandMemebers": "a",
+    "bandMemebers": [
+      "aaa",
+      "aaaa",
+      "1991"
+    ],
     "previousMembers": []
   }
 ]

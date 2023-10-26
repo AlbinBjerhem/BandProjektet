@@ -1,5 +1,5 @@
-import { Band } from "./addBand.js"
-import { Artist } from "./addArtist.js"
+import { Band, Bands } from "./addBand.js"
+import { Artist, Artists } from "./addArtist.js"
 import { FileCheck } from "./Utility.js";
 import fs from "fs"
 import prompt from "prompt-sync";
@@ -119,6 +119,8 @@ export class Menu {
           const filePath = "Bands.json";
           const fileChecker = new FileCheck(filePath);
 
+          const newArtist = new Artist(name, infoText, birthDay, activeBands, previousBands, instruments);
+
           if (fileChecker.isFileNotEmpty()) {
             let addBandChoice = false;
 
@@ -130,20 +132,33 @@ export class Menu {
                   Band.listBands();
                   addBandChoice = true;
 
-                  const bandID = this.promptSync("Enter the ID of the band to add to the artist: ");
-                  const selectedBand = Band.getBandById(bandID);
+                  const bandID = this.promptSync("Type the ID of the band you want to add to this artist: ");
+                  const selectedBand = Band.getBandById(parseInt(bandID));
 
                   if (selectedBand) {
                     const artistName = newArtist.name;
-                    const instrument = this.promptSync(`Enter the instrument ${artistName} plays in the band: `);
-                    const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
+                    console.log("The artists avalible instruments: ");
 
-                    newArtist.associateWithBand(selectedBand.name, instrument, joinYear);
+                    instruments.forEach((instrument, index) => {
+                      console.log(`${index + 1}. ${instrument}`);
+                    });
 
-                    selectedBand.addActiveMember(artistName, instrument, joinYear);
+                    const instrumentIndex = parseInt(this.promptSync("Type the id of the instrument played by the artist: "));
 
-                    fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
-                    fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+                    if (instrumentIndex >= 1 && instrumentIndex <= instruments.length) {
+                      const selectedInstrument = instruments[instrumentIndex - 1];
+
+                      const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
+
+                      newArtist.activeBands.push(selectedBand.name, selectedInstrument, joinYear);
+
+                      selectedBand.bandMemebers.push(artistName, selectedInstrument, joinYear);
+
+                      fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
+                      fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+                    } else {
+                      console.log("Invalid instrument selection. Please choose a valid instrument.");
+                    }
                   } else {
                     console.log("Invalid band ID. The selected band does not exist.");
                   }
@@ -295,7 +310,7 @@ export class Menu {
             }
           }
           const yearDissolved = "";
-          const bandMemebers = promptSync("Who are the bands members: ");
+          const bandMemebers = [];
           const previousMembers = [];
           Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers)
           break;
