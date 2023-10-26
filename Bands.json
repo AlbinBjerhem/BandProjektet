@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "aaa",
+    "infoText": "aaaaa",
+    "yearCreated": "1200",
+    "yearDissolved": "",
+    "bandMemebers": [],
+    "previousMembers": []
+  }
+]

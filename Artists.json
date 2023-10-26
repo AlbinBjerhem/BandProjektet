@@ -324,7 +324,7 @@
     "id": 35,
     "name": "dsa",
     "infoText": "dsadsa",
-    "birthDay": "2000-01-01",
+    "birthDay": "2000-01-01T00:00:00.000Z",
     "activeBands": [
       {
         "bandName": "aaa",
@@ -335,6 +335,17 @@
     "previousBands": [],
     "instruments": [
       "hejs"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "aaa",
+    "infoText": "aaaaa",
+    "birthDay": "1991-11-11",
+    "activeBands": [],
+    "previousBands": [],
+    "instruments": [
+      "Guitarr"
     ]
   }
 ]

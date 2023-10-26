@@ -14,3 +14,7 @@ export class FileCheck {
     }
   }
 }
+
+export class MenuMethods {
+
+}
