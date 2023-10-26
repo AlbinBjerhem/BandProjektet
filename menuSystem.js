@@ -49,7 +49,7 @@ export class Menu {
       // console.clear();
       console.log("\nArtist Menu\n");
       console.log("1. Add Artist");
-      console.log("2. Remove Artist");
+      console.log("2. Edit Artist");
       console.log("3. Show Artists");
       console.log("4. Go back to Main Menu");
 
@@ -60,7 +60,7 @@ export class Menu {
           this.addArtistInformation();
           break;
         case "2":
-          this.removeArtist();
+          this.editArtist();
           break;
         case "3":
           this.showArtistInfo();
@@ -80,7 +80,7 @@ export class Menu {
       // console.clear();
       console.log("n\Band Menu\n");
       console.log("1. Add Band");
-      console.log("2. Remove Band");
+      console.log("2. Edit Band");
       console.log("3. Show Bands");
       console.log("4. Go back to Main Menu");
 
@@ -92,7 +92,7 @@ export class Menu {
           this.addBandInformation();
           break;
         case "2":
-          this.removeBandInformation();
+          this.editBand();
           break;
         case "3":
           this.displayBandInformation();
@@ -208,9 +208,9 @@ export class Menu {
 
                 const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
 
-                Artist.activeBandsAdd(newArtist, selectedBand.name, selectedInstrument, joinYear);
+                Artist.activeBandsAdd(newArtist.id, selectedBand.name, selectedInstrument, joinYear);
 
-                Band.activeArtistsAdd(selectedBand, artistName, selectedInstrument, joinYear);
+                Band.activeArtistsAdd(selectedBand.id, artistName, selectedInstrument, joinYear);
 
                 fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
                 fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
@@ -237,45 +237,39 @@ export class Menu {
   // -------------------------------------------------------------------------------------
   // --------------------- TA BORT ARTIST --------------------
 
-  removeArtist() {
+  editArtist() {
     if (fileCheckerArtists.isFileNotEmpty()) {
-      Artist.listArtists();
 
-      let artistToRemove;
+      let editArtistChoice = false;
 
-      while (true) {
-        const removeArtist = this.promptSync("Type the ID of the artist you want to remove: ");
-        artistToRemove = Artist.getArtistById(parseInt(removeArtist));
+      while (!editArtistChoice) {
 
-        if (artistToRemove) {
-          break;
-        } else {
-          console.log("Invalid artist ID. Please enter a valid ID.");
-        }
-      }
+        console.log("Edit Artist\n");
+        console.log("1. Add band to Artist");
+        console.log("2. Remove band from Artist");
+        console.log("3. Remove Artist");
+        console.log("4. Go back to Artist Menu");
 
-      console.log(`Removing artist with ID ${artistToRemove.id} - ${artistToRemove.name}`);
+        const choiceEditArtist = this.promptSync("Enter your choice: ")
 
-      let validInput = false;
-
-      while (!validInput) {
-        const confirm = this.promptSync("Are you sure you want to remove this artist? (yes/no): ");
-
-        switch (confirm.toLowerCase()) {
-          case "yes":
-            Artist.removeArtist(artistToRemove.id);
-            validInput = true;
+        switch (choiceEditArtist) {
+          case "1":
+            this.addBandToArtist();
             break;
-          case "no":
-            validInput = true;
+          case "2":
+            console.log("Remove Band");
             break;
+          case "3":
+            this.removeArtist();
+            break;
+          case "4":
+            return;
           default:
-            console.log("Invalid input. Please enter 'yes' or 'no'.");
+            console.log("Invalid choice. Please select a number between 1 - 4");
         }
       }
-    } else {
-      console.log("There are no Artists in your directory. Please add some.");
     }
+
   }
 
   // -----------------------------------------------------------------------------
@@ -352,7 +346,7 @@ export class Menu {
   }
   // ----------------------------------------------------------------------------------------
   // -------------------- TA BORT BAND --------------------
-  removeBandInformation() {
+  editBand() {
     if (fileCheckerBands.isFileNotEmpty()) {
       Band.listBands();
 
@@ -419,6 +413,100 @@ export class Menu {
       console.log("There are no bands in the directory. Add some bands first.");
     }
   }
+
+  addBandToArtist() {
+    if (fileCheckerArtists.isFileNotEmpty() && fileCheckerBands.isFileNotEmpty()) {
+      Artist.listArtistsExtended();
+
+      const artistID = this.promptSync("Enter the ID of the artist to add a band: ");
+      const selectedArtist = Artist.getArtistById(parseInt(artistID));
+
+      if (selectedArtist) {
+        Band.listBands();
+        const bandID = this.promptSync("Enter the ID of the band to add to the artist: ");
+        const selectedBand = Band.getBandById(parseInt(bandID));
+
+        if (selectedBand && selectedBand.bandMembers) {
+          const artistName = selectedArtist.name;
+
+          console.log("The artist's available instruments: ");
+          selectedArtist.instruments.forEach((instrument, index) => {
+            console.log(`${index + 1}. ${instrument}`);
+          });
+
+          const instrumentIndex = parseInt(this.promptSync("Type the ID of the instrument played by the artist: "));
+
+          if (instrumentIndex >= 1 && instrumentIndex <= selectedArtist.instruments.length) {
+            const selectedInstrument = selectedArtist.instruments[instrumentIndex - 1];
+            const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
+
+            if (!selectedBand.bandMembers) {
+              selectedBand.bandMembers = [];
+            }
+
+            selectedBand.bandMembers.push({ artistName, instrument: selectedInstrument, joinYear });
+            selectedArtist.activeBands.push({ bandName: selectedBand.name, instrument: selectedInstrument, joinYear });
+
+            fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
+            fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+          } else {
+            console.log("Invalid instrument selection. Please choose a valid instrument.");
+          }
+        } else {
+          console.log("Invalid band ID or bandMembers array is not defined. The selected band may not exist or is missing necessary data.");
+        }
+      } else {
+        console.log("Invalid artist ID. The selected artist does not exist.");
+      }
+    } else {
+      console.log("There are no artists or bands in the directory. Please add some first.");
+    }
+  }
+
+
+
+  removeArtist() {
+    if (fileCheckerArtists.isFileNotEmpty()) {
+      Artist.listArtists();
+
+      let artistToRemove;
+
+      while (true) {
+        const removeArtist = this.promptSync("Type the ID of the artist you want to remove: ");
+        artistToRemove = Artist.getArtistById(parseInt(removeArtist));
+
+        if (artistToRemove) {
+          break;
+        } else {
+          console.log("Invalid artist ID. Please enter a valid ID.");
+        }
+      }
+
+      console.log(`Removing artist with ID ${artistToRemove.id} - ${artistToRemove.name}`);
+
+      let validInput = false;
+
+      while (!validInput) {
+        const confirm = this.promptSync("Are you sure you want to remove this artist? (yes/no): ");
+
+        switch (confirm.toLowerCase()) {
+          case "yes":
+            Artist.removeArtist(artistToRemove.id);
+            validInput = true;
+            break;
+          case "no":
+            validInput = true;
+            break;
+          default:
+            console.log("Invalid input. Please enter 'yes' or 'no'.");
+        }
+      }
+    } else {
+      console.log("There are no Artists in your directory. Please add some.");
+    }
+  }
+
+
 
 }
 

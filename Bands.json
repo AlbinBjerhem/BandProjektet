@@ -5,7 +5,13 @@
     "infoText": "aaaaa",
     "yearCreated": "1200",
     "yearDissolved": "",
-    "bandMemebers": [],
+    "bandMembers": [
+      {
+        "artistName": "aaa",
+        "instrument": "Guitarr",
+        "joinYear": "1991"
+      }
+    ],
     "previousMembers": []
   }
 ]

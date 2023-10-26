@@ -18,7 +18,7 @@ export class Band {
   }
 
   static activeArtistsAdd(selectedBand, artistName, instrument, joinYear) {
-    selectedBand.bandMemebers.push({ artistName, instrument, joinYear });
+    selectedBand.bandMembers.push({ artistName, instrument, joinYear });
   }
 
 
@@ -35,7 +35,7 @@ export class Band {
       console.log(`ID: ${band.id}, Name: ${band.name}`);
       console.log(`Info Text ${band.infoText}`);
 
-      const activeMemberInfo = band.bandMemebers.map(membersInfo => {
+      const activeMemberInfo = band.bandMembers.map(membersInfo => {
         return `Name: ${membersInfo.artistName}, Instrument: ${membersInfo.instrument}, Started in band: ${membersInfo.joinYear}`;
       });
       console.log(`Active Members: ${activeMemberInfo.join(', ')}`);
@@ -61,22 +61,22 @@ export class Band {
     }
   }
 
-  constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = [], previousMembers = []) {
+  constructor(name, infoText, yearCreated, yearDissolved = 0, bandMembers = [], previousMembers = []) {
     this.id = Band.nextBandId++;
     this.name = name;
     this.infoText = infoText;
     this.yearCreated = yearCreated;
     this.yearDissolved = yearDissolved;
-    this.bandMemebers = bandMemebers;
+    this.bandMembers = bandMembers;
     this.previousMembers = previousMembers;
   }
 
-  static createBand(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = [], previousMembers = []) {
-    return new Band(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers);
+  static createBand(name, infoText, yearCreated, yearDissolved = 0, bandMembers = [], previousMembers = []) {
+    return new Band(name, infoText, yearCreated, yearDissolved, bandMembers, previousMembers);
   }
 
-  static addBand(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers) {
-    const newBand = new Band(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers);
+  static addBand(name, infoText, yearCreated, yearDissolved, bandMembers, previousMembers) {
+    const newBand = new Band(name, infoText, yearCreated, yearDissolved, bandMembers, previousMembers);
     Bands.push(newBand);
 
     fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
