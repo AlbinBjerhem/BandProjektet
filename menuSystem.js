@@ -5,6 +5,11 @@ import fs from "fs"
 import prompt from "prompt-sync";
 const promptSync = prompt();
 
+const filePathBands = "Bands.json";
+const filePathArtists = "Artists.json";
+const fileCheckerBands = new FileCheck(filePathBands);
+const fileCheckerArtists = new FileCheck(filePathArtists);
+
 export class Menu {
   constructor() {
     this.promptSync = prompt();
@@ -116,12 +121,9 @@ export class Menu {
           const activeBands = [];
           const previousBands = [];
 
-          const filePath = "Bands.json";
-          const fileChecker = new FileCheck(filePath);
-
           const newArtist = new Artist(name, infoText, birthDay, activeBands, previousBands, instruments);
 
-          if (fileChecker.isFileNotEmpty()) {
+          if (fileCheckerBands.isFileNotEmpty()) {
             let addBandChoice = false;
 
             while (!addBandChoice) {
@@ -184,39 +186,45 @@ export class Menu {
 
 
         case "2":
-          Artist.listArtists();
 
-          let artistToRemove;
+          if (fileCheckerArtists.isFileNotEmpty()) {
 
-          while (true) {
-            const removeArtist = this.promptSync("Type the ID of the artist you want to remove: ");
-            artistToRemove = Artist.getArtistById(parseInt(removeArtist));
+            Artist.listArtists();
 
-            if (artistToRemove) {
-              break;
-            } else {
-              console.log("Invalid artist ID. Please enter a valid ID.");
-            }
-          }
+            let artistToRemove;
 
-          console.log(`Removing artist with ID ${artistToRemove.id} - ${artistToRemove.name}`);
+            while (true) {
+              const removeArtist = this.promptSync("Type the ID of the artist you want to remove: ");
+              artistToRemove = Artist.getArtistById(parseInt(removeArtist));
 
-          let validInput = false;
-
-          while (!validInput) {
-            const confirm = this.promptSync("Are you sure you want to remove this artist? (yes/no): ");
-
-            switch (confirm.toLowerCase()) {
-              case "yes":
-                Artist.removeArtist(artistToRemove.id);
-                validInput = true;
+              if (artistToRemove) {
                 break;
-              case "no":
-                validInput = true;
-                break;
-              default:
-                console.log("Invalid input. Please enter 'yes' or 'no'.");
+              } else {
+                console.log("Invalid artist ID. Please enter a valid ID.");
+              }
             }
+
+            console.log(`Removing artist with ID ${artistToRemove.id} - ${artistToRemove.name}`);
+
+            let validInput = false;
+
+            while (!validInput) {
+              const confirm = this.promptSync("Are you sure you want to remove this artist? (yes/no): ");
+
+              switch (confirm.toLowerCase()) {
+                case "yes":
+                  Artist.removeArtist(artistToRemove.id);
+                  validInput = true;
+                  break;
+                case "no":
+                  validInput = true;
+                  break;
+                default:
+                  console.log("Invalid input. Please enter 'yes' or 'no'.");
+              }
+            }
+          } else {
+            console.log("There are no Artists in your directory. Please add some.");
           }
           break;
 
@@ -225,23 +233,28 @@ export class Menu {
 
 
         case "3":
-          Artist.listArtists();
 
-          let userInput = false;
+          if (fileCheckerArtists.isFileNotEmpty()) {
+            Artist.listArtists();
 
-          while (!userInput) {
-            const extendedInfo = this.promptSync("Do you want to see more information about the artists? (yes/no): ")
+            let userInput = false;
 
-            switch (extendedInfo.toLocaleLowerCase()) {
-              case "yes":
-                Artist.listArtistsExtended();
-                userInput = true;
-              case "no":
-                userInput = true;
-                break;
-              default:
-                console.log("Invalid input. Please enter 'yes' or 'no'.");
+            while (!userInput) {
+              const extendedInfo = this.promptSync("Do you want to see more information about the artists? (yes/no): ")
+
+              switch (extendedInfo.toLocaleLowerCase()) {
+                case "yes":
+                  Artist.listArtistsExtended();
+                  userInput = true;
+                case "no":
+                  userInput = true;
+                  break;
+                default:
+                  console.log("Invalid input. Please enter 'yes' or 'no'.");
+              }
             }
+          } else {
+            console.log("There are no Artists in your directory. Please add some.");
           }
           break;
 
@@ -320,62 +333,75 @@ export class Menu {
 
 
         case "2":
-          Band.listBands();
 
-          let bandToRemove;
+          if (fileCheckerBands.isFileNotEmpty()) {
 
-          while (true) {
-            const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
-            bandToRemove = Band.getBandById(parseInt(removeBand));
+            Band.listBands();
 
-            if (bandToRemove) {
-              break;
-            } else {
-              console.log("Invalid band ID. Please enter a valid ID.");
-            }
-          }
+            let bandToRemove;
 
-          console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+            while (true) {
+              const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
+              bandToRemove = Band.getBandById(parseInt(removeBand));
 
-          let validInput = false;
-
-          while (!validInput) {
-            const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
-
-            switch (confirm.toLowerCase()) {
-              case "yes":
-                Band.removeBand(bandToRemove.id);
-                validInput = true;
+              if (bandToRemove) {
                 break;
-              case "no":
-                validInput = true;
-                break;
-              default:
-                console.log("Invalid input. Please enter 'yes' or 'no'.");
+              } else {
+                console.log("Invalid band ID. Please enter a valid ID.");
+              }
             }
+
+            console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+
+            let validInput = false;
+
+            while (!validInput) {
+              const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
+
+              switch (confirm.toLowerCase()) {
+                case "yes":
+                  Band.removeBand(bandToRemove.id);
+                  validInput = true;
+                  break;
+                case "no":
+                  validInput = true;
+                  break;
+                default:
+                  console.log("Invalid input. Please enter 'yes' or 'no'.");
+              }
+            }
+
+          } else {
+            console.log("There are no bands in the directory. Add some bands first.");
           }
           break;
 
         // ------------------------- VISA LISTA MED BAND ---------------------
 
         case "3":
-          Band.listBands();
 
-          let userInput = false
+          if (fileCheckerBands.isFileNotEmpty()) {
 
-          while (!userInput) {
-            const extendedInfo = this.promptSync("Do you want to see more information about the band? (yes/no): ")
+            Band.listBands();
 
-            switch (extendedInfo.toLocaleLowerCase()) {
-              case "yes":
-                Band.listBandsExtended();
-                userInput = true;
-              case "no":
-                userInput = true;
-                break;
-              default:
-                console.log("Invalid input. Please enter 'yes' or 'no'.");
+            let userInput = false
+
+            while (!userInput) {
+              const extendedInfo = this.promptSync("Do you want to see more information about the band? (yes/no): ")
+
+              switch (extendedInfo.toLocaleLowerCase()) {
+                case "yes":
+                  Band.listBandsExtended();
+                  userInput = true;
+                case "no":
+                  userInput = true;
+                  break;
+                default:
+                  console.log("Invalid input. Please enter 'yes' or 'no'.");
+              }
             }
+          } else {
+            console.log("There are no bands in the directory. Add some bands first.");
           }
           break;
 
@@ -389,3 +415,4 @@ export class Menu {
     }
   }
 }
+
