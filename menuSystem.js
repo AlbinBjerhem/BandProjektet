@@ -360,6 +360,23 @@ export class Menu {
 
         case "3":
           Band.listBands();
+
+          let userInput = false
+
+          while (!userInput) {
+            const extendedInfo = this.promptSync("Do you want to see more information about the band? (yes/no): ")
+
+            switch (extendedInfo.toLocaleLowerCase()) {
+              case "yes":
+                Band.listBandsExtended();
+                userInput = true;
+              case "no":
+                userInput = true;
+                break;
+              default:
+                console.log("Invalid input. Please enter 'yes' or 'no'.");
+            }
+          }
           break;
 
         // -------------------- TILLBAKA TILL HUVUDMENY --------------------------

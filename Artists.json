@@ -295,7 +295,7 @@
     "id": 31,
     "name": "aaaa",
     "infoText": "aaaaaaa",
-    "birthDay": "1111-11-11",
+    "birthDay": "1111-11-11T00:00:00.000Z",
     "activeBands": [],
     "previousBands": [],
     "instruments": [
@@ -307,7 +307,7 @@
     "id": 33,
     "name": "dsadsadsa",
     "infoText": "dsadsadsa",
-    "birthDay": "1111-11-11",
+    "birthDay": "1111-11-11T00:00:00.000Z",
     "activeBands": [
       {
         "bandName": "aaa",
@@ -318,6 +318,23 @@
     "previousBands": [],
     "instruments": [
       "dsadsa"
+    ]
+  },
+  {
+    "id": 35,
+    "name": "dsa",
+    "infoText": "dsadsa",
+    "birthDay": "2000-01-01",
+    "activeBands": [
+      {
+        "bandName": "aaa",
+        "instrument": "hejs",
+        "joinYear": "1991"
+      }
+    ],
+    "previousBands": [],
+    "instruments": [
+      "hejs"
     ]
   }
 ]

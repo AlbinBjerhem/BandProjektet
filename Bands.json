@@ -28,8 +28,22 @@
         "artistName": "dsadsadsa",
         "instrument": "dsadsa",
         "joinYear": "1991"
+      },
+      {
+        "artistName": "dsa",
+        "instrument": "hejs",
+        "joinYear": "1991"
       }
     ],
+    "previousMembers": []
+  },
+  {
+    "id": 3,
+    "name": "1111",
+    "infoText": "dsadsadsa",
+    "yearCreated": "1991",
+    "yearDissolved": "",
+    "bandMemebers": [],
     "previousMembers": []
   }
 ]

@@ -29,6 +29,22 @@ export class Band {
     });
   }
 
+  static listBandsExtended() {
+    console.log("List of Bands (Extended):");
+    Bands.forEach((band) => {
+      console.log(`ID: ${band.id}, Name: ${band.name}`);
+      console.log(`Info Text ${band.infoText}`);
+
+      const activeMemberInfo = band.bandMemebers.map(membersInfo => {
+        return `Name: ${membersInfo.artistName}, Instrument: ${membersInfo.instrument}, Started in band: ${membersInfo.joinYear}`;
+      });
+      console.log(`Active Members: ${activeMemberInfo.join(', ')}`);
+      console.log(`Previous Members: ${band.previousMembers.join(', ')}`);
+      console.log(`Year the band was disolved: ${band.yearDissolved}`);
+      console.log("\n");
+    });
+  }
+
   static getBandById(id) {
     return Bands.find((band) => band.id === id);
   }
