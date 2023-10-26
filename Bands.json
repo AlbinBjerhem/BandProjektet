@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "name": "aaa",
-    "infoText": "aaaaa",
-    "yearCreated": "1200",
+    "name": "Argus",
+    "infoText": "Plays music",
+    "yearCreated": "1990",
     "yearDissolved": "",
     "bandMembers": [],
     "previousMembers": [
       {
-        "artistName": "aaa",
+        "artistName": "Albin",
         "instrument": "Guitarr",
         "joinYear": "1991",
-        "leftBandDate": "1990-02-02"
+        "leftBandDate": "d"
       }
     ]
   }

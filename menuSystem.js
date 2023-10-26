@@ -268,6 +268,8 @@ export class Menu {
             console.log("Invalid choice. Please select a number between 1 - 4");
         }
       }
+    } else {
+      console.log("There are no Artists in your directory. Please add some.");
     }
 
   }
@@ -369,7 +371,7 @@ export class Menu {
             this.removeBandFromArtist();
             break;
           case "3":
-            this.removeArtist();
+            this.removeBand();
             break;
           case "4":
             return;
@@ -377,6 +379,8 @@ export class Menu {
             console.log("Invalid choice. Please select a number between 1 - 4");
         }
       }
+    } else {
+      console.log("There are no bands in the directory. Add some bands first.");
     }
   }
   // --------------------------------------------------------------------------------
@@ -431,7 +435,18 @@ export class Menu {
 
           if (instrumentIndex >= 1 && instrumentIndex <= selectedArtist.instruments.length) {
             const selectedInstrument = selectedArtist.instruments[instrumentIndex - 1];
-            const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
+
+            let joinYear;
+            while (true) {
+              joinYear = this.promptSync(`Enter the year ${artistName} joined the band (4 digits): `);
+
+              if (/^\d{4}$/.test(joinYear)) {
+
+                break;
+              } else {
+                console.log("Invalid year format. Please enter a four-digit year (e.g., 2023).");
+              }
+            }
 
             if (!selectedBand.bandMembers) {
               selectedBand.bandMembers = [];
@@ -524,7 +539,7 @@ export class Menu {
             selectedArtist.activeBands.splice(bandIndex, 1);
 
 
-            const leftBandDate = this.promptSync(`Enter the year when you left ${selectedBand.name} (yyyy): `);
+
 
             if (/^\d{4}$/.test(leftBandDate)) {
 
@@ -582,6 +597,46 @@ export class Menu {
     }
   }
 
+  removeBand() {
+    Band.listBands();
+
+    if (fileCheckerBands.isFileNotEmpty()) {
+      let bandToRemove;
+
+      while (true) {
+        const removeBand = this.promptSync("Type the ID of the band you want to remove: ");
+        bandToRemove = Band.getBandById(parseInt(removeBand));
+
+        if (bandToRemove) {
+          break;
+        } else {
+          console.log("Invalid band ID. Please enter a valid ID.");
+        }
+      }
+
+      console.log(`Removing band with ID ${bandToRemove.id} - ${bandToRemove.name}`);
+
+      let validInput = false;
+
+      while (!validInput) {
+        const confirm = this.promptSync("Are you sure you want to remove this band? (yes/no): ");
+
+        switch (confirm.toLowerCase()) {
+          case "yes":
+            Band.removeBand(bandToRemove.id);
+            validInput = true;
+            break;
+          case "no":
+            validInput = true;
+            break;
+          default:
+            console.log("Invalid input. Please enter 'yes' or 'no'.");
+        }
+      }
+    } else {
+      console.log("There are no bands in the directory. Add some bands first.");
+    }
+  }
 
 
 
