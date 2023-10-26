@@ -40,27 +40,29 @@ export class Band {
     }
   }
 
-  constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = []) {
+  constructor(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = [], previousMembers = []) {
     this.id = Band.nextBandId++;
     this.name = name;
     this.infoText = infoText;
     this.yearCreated = yearCreated;
     this.yearDissolved = yearDissolved;
     this.bandMemebers = bandMemebers;
+    this.previousMembers = previousMembers;
   }
 
-  static createBand(name, infoText, yearCreated, yearDissolved = 0, bandMemebers) {
-    return new Band(name, infoText, yearCreated, yearDissolved = 0, bandMemebers)
+  static createBand(name, infoText, yearCreated, yearDissolved = 0, bandMemebers = [], previousMembers = []) {
+    return new Band(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers);
   }
-  static addBand(name, infoText, yearCreated, yearDissolved, bandMemebers) {
-    const newBand = new Band(name, infoText, yearCreated, yearDissolved, bandMemebers);
+
+  static addBand(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers) {
+    const newBand = new Band(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers);
     Bands.push(newBand);
 
     fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
 
     console.log("Band added successfully.");
   }
-
 }
+
 
 Band.loadBands();

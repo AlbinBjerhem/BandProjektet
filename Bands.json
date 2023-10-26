@@ -1,34 +1,11 @@
 [
   {
-    "id": 4,
-    "name": "a",
-    "infoText": "a",
-    "yearCreated": "a",
-    "yearDissolved": "aa",
-    "bandMemebers": "a"
-  },
-  {
-    "id": 5,
-    "name": "a",
-    "infoText": "a",
-    "yearCreated": "a",
-    "yearDissolved": "a",
-    "bandMemebers": "a"
-  },
-  {
-    "id": 6,
-    "name": "a",
-    "infoText": "a",
-    "yearCreated": "a",
-    "yearDissolved": "a",
-    "bandMemebers": "a"
-  },
-  {
-    "id": 7,
-    "name": "a",
-    "infoText": "a",
-    "yearCreated": "a",
-    "yearDissolved": "a",
-    "bandMemebers": "a"
+    "id": 1,
+    "name": "aaa",
+    "infoText": "aaaaaaa",
+    "yearCreated": "1111",
+    "yearDissolved": "",
+    "bandMemebers": "a",
+    "previousMembers": []
   }
 ]

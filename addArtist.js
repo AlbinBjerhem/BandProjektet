@@ -76,7 +76,7 @@ export class Artist {
     }
   }
 
-  constructor(name, infoText, birthDay, activeBands = "", previousBands = "", instruments = []) {
+  constructor(name, infoText, birthDay, activeBands = [], previousBands = [], instruments = []) {
     this.id = Artist.nextArtistId++;
     this.name = name;
     this.infoText = infoText;
@@ -86,7 +86,7 @@ export class Artist {
     this.instruments = instruments;
   }
 
-  static createArtist(name, infoText, birthDay, activeBands = "", previousBands = "", instruments = []) {
+  static createArtist(name, infoText, birthDay, activeBands = [], previousBands = [], instruments = []) {
     return new Artist(name, infoText, birthDay, activeBands, previousBands, instruments);
   }
 

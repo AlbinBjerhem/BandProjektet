@@ -1,5 +1,6 @@
 import { Band } from "./addBand.js"
 import { Artist } from "./addArtist.js"
+import { FileCheck } from "./Utility.js";
 import fs from "fs"
 import prompt from "prompt-sync";
 const promptSync = prompt();
@@ -8,6 +9,9 @@ export class Menu {
   constructor() {
     this.promptSync = prompt();
   }
+
+  // ---------------- HUVUD MENY -------------------
+
 
   mainMenu() {
     while (true) {
@@ -35,6 +39,10 @@ export class Menu {
       }
     }
   }
+
+  // ------------------ ARTIST MENY ---------------------
+
+
   artistMenu() {
     while (true) {
       // console.clear();
@@ -47,10 +55,30 @@ export class Menu {
       const artistMenuChoice = this.promptSync('Enter your choice: ')
 
       switch (artistMenuChoice) {
+
+        // ------------------- LÄGGA TILL ARTIST ---------------------
+
         case "1":
           console.log("You selected Add Artist");
-          const name = this.promptSync("Type artists name: ");
-          const infoText = this.promptSync("Type artist information: ");
+
+          let name = "";
+
+          while (name.length < 3) {
+            name = this.promptSync("Type artists name (at least 3 characters): ")
+            if (name.length < 3) {
+              console.log("You must type at least 3 characters.");
+            }
+          }
+
+          let infoText = "";
+
+          while (infoText.length < 5) {
+            infoText = this.promptSync("Type information about the artist (at least 5 characters): ")
+            if (infoText.length < 5) {
+              console.log("You must type at least 5 characters.");
+            }
+          }
+
 
           let birthDay;
           while (true) {
@@ -69,8 +97,6 @@ export class Menu {
             }
           }
 
-          const activeBands = [];
-          const previousBands = [];
           const instruments = [];
 
           while (true) {
@@ -87,9 +113,60 @@ export class Menu {
             }
           }
 
+          const activeBands = [];
+          const previousBands = [];
+
+          const filePath = "Bands.json";
+          const fileChecker = new FileCheck(filePath);
+
+          if (fileChecker.isFileNotEmpty()) {
+            let addBandChoice = false;
+
+            while (!addBandChoice) {
+              const confirm = this.promptSync("Do you want to add a band to this artist? (yes/no): ");
+
+              switch (confirm.toLowerCase()) {
+                case "yes":
+                  Band.listBands();
+                  addBandChoice = true;
+
+                  const bandID = this.promptSync("Enter the ID of the band to add to the artist: ");
+                  const selectedBand = Band.getBandById(bandID);
+
+                  if (selectedBand) {
+                    const artistName = newArtist.name;
+                    const instrument = this.promptSync(`Enter the instrument ${artistName} plays in the band: `);
+                    const joinYear = this.promptSync(`Enter the year ${artistName} joined the band: `);
+
+                    newArtist.associateWithBand(selectedBand.name, instrument, joinYear);
+
+                    selectedBand.addActiveMember(artistName, instrument, joinYear);
+
+                    fs.writeFileSync("Artists.json", JSON.stringify(Artists, null, 2), "utf-8");
+                    fs.writeFileSync("Bands.json", JSON.stringify(Bands, null, 2), "utf-8");
+                  } else {
+                    console.log("Invalid band ID. The selected band does not exist.");
+                  }
+                  break;
+                case "no":
+                  addBandChoice = true;
+                  break;
+                default:
+                  console.log("Invalid input. Please enter 'yes' or 'no'.");
+              }
+            }
+          } else {
+            console.log("There are no bands in your directory. Please add bands in order to add them to artists.");
+          }
+
+
 
           Artist.addArtist(name, infoText, birthDay, activeBands, previousBands, instruments)
           break;
+
+        // --------------------- TA BORT ARTIST --------------------
+
+
         case "2":
           Artist.listArtists();
 
@@ -100,7 +177,7 @@ export class Menu {
             artistToRemove = Artist.getArtistById(parseInt(removeArtist));
 
             if (artistToRemove) {
-              break; // Exit the loop if a valid artist is found
+              break;
             } else {
               console.log("Invalid artist ID. Please enter a valid ID.");
             }
@@ -126,6 +203,11 @@ export class Menu {
             }
           }
           break;
+
+
+        // -------------------- VISA LISTA MED ARTISTER ---------------------
+
+
         case "3":
           Artist.listArtists();
 
@@ -146,6 +228,9 @@ export class Menu {
             }
           }
           break;
+
+        // -------------------- TILLBAKA TILL HUVUDMENY -------------------
+
         case "4":
           return;
         default:
@@ -153,6 +238,9 @@ export class Menu {
       }
     }
   }
+
+  // --------------- BAND MENY -------------------
+
 
   bandMenu() {
     while (true) {
@@ -166,15 +254,55 @@ export class Menu {
       const bandMenuChoice = this.promptSync('Enter your choice: ')
 
       switch (bandMenuChoice) {
+
+        // ----------------- LÄGGA TILL BAND -------------------
+
         case "1":
           console.log("You selected Add Band");
-          const name = promptSync("Type bands name: ")
-          const infoText = promptSync("Type in band information: ");
-          const yearCreated = promptSync("Type in the year tha band whas created: ");
-          const yearDissolved = promptSync("What year was the band dissolved: ");
+
+          let name = "";
+
+          while (name.length < 3) {
+            name = this.promptSync("Type artists name (at least 3 characters): ")
+            if (name.length < 3) {
+              console.log("You must type at least 3 characters.");
+            }
+          }
+
+          let infoText = "";
+
+          while (infoText.length < 5) {
+            infoText = this.promptSync("Type information about the artist (at least 5 characters): ")
+            if (infoText.length < 5) {
+              console.log("You must type at least 5 characters.");
+            }
+          }
+
+          let yearCreated;
+          while (true) {
+            yearCreated = this.promptSync("Type what year the band was created (yyyy): ")
+            if (/^\d{4}$/.test(yearCreated)) {
+              const inputYear = new Date(yearCreated);
+              const currentYear = new Date();
+
+              if (inputYear <= currentYear) {
+                break;
+              } else {
+                console.log("The band might be created in the future but it´s hard to know right now :). Please enter a valid year!");
+              }
+            } else {
+              console.log("Invalid format. Plese use yyyy (e.g., 1969)");
+            }
+          }
+          const yearDissolved = "";
           const bandMemebers = promptSync("Who are the bands members: ");
-          Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers)
+          const previousMembers = [];
+          Band.addBand(name, infoText, yearCreated, yearDissolved, bandMemebers, previousMembers)
           break;
+
+        // -------------------- TA BORT BAND --------------------
+
+
         case "2":
           Band.listBands();
 
@@ -185,7 +313,7 @@ export class Menu {
             bandToRemove = Band.getBandById(parseInt(removeBand));
 
             if (bandToRemove) {
-              break; // Exit the loop if a valid band is found
+              break;
             } else {
               console.log("Invalid band ID. Please enter a valid ID.");
             }
@@ -212,9 +340,14 @@ export class Menu {
           }
           break;
 
+        // ------------------------- VISA LISTA MED BAND ---------------------
+
         case "3":
           Band.listBands();
           break;
+
+        // -------------------- TILLBAKA TILL HUVUDMENY --------------------------
+
         case "4":
           return;
         default:
